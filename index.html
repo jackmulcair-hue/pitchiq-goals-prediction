@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1220" />
+    <meta
+      name="description"
+      content="PitchIQ football intelligence dashboard for Over 1.5 and Over 2.5 goals analysis."
+    />
+    <title>PitchIQ</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="status-row">
+          <div class="time">22:02</div>
+          <div class="status-icons">
+            <span>◔</span>
+            <span>📶</span>
+            <span>⌁</span>
+            <span>🔋 17%</span>
+          </div>
+        </div>
+
+        <div class="browser-bar">
+          <div class="browser-left">
+            <div class="home-glyph">⌂</div>
+            <div class="url-text">app.base44.com/apps/6</div>
+          </div>
+          <div class="browser-actions">
+            <button class="mini-btn add-btn">＋</button>
+            <button class="mini-btn badge-btn">4</button>
+            <button class="mini-btn menu-btn">⋮</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-panel">
+        <div class="app-switcher">
+          <button class="switch active">Preview</button>
+          <button class="switch">Dashboard</button>
+          <div class="switch-actions">
+            <button class="circle-icon">⋯</button>
+            <button class="circle-icon accent">🏆</button>
+            <button class="circle-icon">⚙</button>
+          </div>
+        </div>
+
+        <section class="section-card home-card">
+          <div class="section-header">
+            <span>Home</span>
+            <span class="chevron">⌄</span>
+          </div>
+        </section>
+
+        <section class="pitchiq-hero">
+          <div class="brand-mark">◡</div>
+          <div class="brand-copy">
+            <h1>PitchIQ</h1>
+            <p>FOOTBALL INTELLIGENCE</p>
+          </div>
+        </section>
+
+        <nav class="nav-tabs" aria-label="Insights navigation">
+          <button class="tab active" data-tab="dashboard">📊 Dashboard</button>
+          <button class="tab" data-tab="fixtures">📅 Fixtures</button>
+          <button class="tab" data-tab="acca">⭐ ACCA Builder</button>
+          <button class="tab" data-tab="preference">📈 Preference</button>
+        </nav>
+
+        <section class="demo-banner">
+          ⚠ Demo / Simulated data. This build runs on a synthetic data provider so the engine is fully functional. All fixtures, stats, injuries, lineups, weather, news and odds are generated for demonstration — they are not real football data. Connect a live provider via the data layer to go live. No probabilities are guarantees.
+        </section>
+
+        <section class="dashboard-header">
+          <h2>Today's Football</h2>
+          <p>Independent probability estimates • <span id="fixture-total">0</span> fixtures tracked</p>
+        </section>
+
+        <button class="acca-button" id="build-acca-btn">✦ Build ACCA</button>
+
+        <div class="filter-row" id="market-filters">
+          <button class="pill active" data-market="all">All Matches</button>
+          <button class="pill" data-market="high">High Probability</button>
+          <button class="pill" data-market="over15">Over 1.5</button>
+          <button class="pill" data-market="over25">Over 2.5</button>
+          <button class="pill" data-market="btts">BTTS</button>
+        </div>
+
+        <div class="date-picker">
+          <span>📅</span>
+          <span>26/09/2026</span>
+          <span>⌄</span>
+        </div>
+
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="text" id="search-input" placeholder="Search teams or competitions..." />
+        </div>
+
+        <div class="league-row">
+          <button class="league-pill active">📊 Leagues</button>
+          <button class="league-pill">Premier League</button>
+          <button class="league-pill">La Liga</button>
+          <button class="league-pill secondary">Chat to Edit</button>
+        </div>
+
+        <div class="league-row secondary-row">
+          <button class="league-pill">Bundesliga</button>
+          <button class="league-pill">Ligue 1</button>
+        </div>
+
+        <section id="cards-container" class="cards-container" aria-live="polite"></section>
+
+        <aside class="acca-panel" id="acca-panel">
+          <div class="acca-header">
+            <h3>Best ACCA</h3>
+            <span class="badge">ROI-led</span>
+          </div>
+
+          <div class="stake-row">
+            <label for="stake-input">Stake</label>
+            <div class="stake-box">
+              <span>£</span>
+              <input id="stake-input" type="number" min="1" max="1000" value="10" />
+            </div>
+          </div>
+
+          <div id="acca-list" class="acca-list"></div>
+
+          <div class="acca-summary">
+            <div class="summary-line">
+              <span>Total odds</span>
+              <strong id="acca-total-odds">0.00</strong>
+            </div>
+            <div class="summary-line">
+              <span>Projected return</span>
+              <strong id="acca-return">£0.00</strong>
+            </div>
+            <div class="summary-line accent-line">
+              <span>Win probability</span>
+              <strong id="acca-win-prob">0%</strong>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(() => {
+            // Fail silently in demo/local builds
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
